@@ -1,0 +1,24 @@
+---
+type Props = {
+    skill: string;
+    circles: number;
+}
+const { skill, circles } = Astro.props;
+
+// if (circles < 0 && circles > 5) {
+//     return new RangeError('Number of circles too high or low')
+// }
+
+const h: string = 'h-2';
+const w: string = 'w-2';
+const filled = Array(circles).fill(true)
+const notFilled = Array(5 - circles).fill(false)
+const isFilled = [...filled, ...notFilled];
+---
+
+<div class="flex flex-wrap text-sm gap-1">
+    <p class="font-semibold w-full">{skill}</p>
+    <div class="flex gap-1 pl-24">
+        {isFilled.map((is) => is ? <div class={`${h} ${w} bg-[var(--main-color)] rounded-full`}></div> : <div class={`${h} ${w} border border-[var(--main-color)] rounded-full`}></div>)}
+    </div>
+</div>
